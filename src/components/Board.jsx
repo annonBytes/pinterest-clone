@@ -32,8 +32,11 @@ const Wrapper = styled.div`
 ` 
 
 const Container = styled.div`
+    max-width: 1260px;
+    column-count: 5;
+    column-gap: 10px;
+    margin: 0 auto;
+    height: 100%;
     background-color: white;
-    width: 80%;
-    display: flex;
     
 ` 

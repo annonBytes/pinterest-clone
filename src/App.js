@@ -1,4 +1,4 @@
-import React, {useState, props} from 'react'
+import React, {useState, useEffect} from 'react'
 import './App.css'
 import Header from '../src/components/Header'
 import Board from './components/Board'
@@ -32,6 +32,35 @@ const onSearchSubmit = (term) => {
     setPins(newPins)
   })
 }
+
+const getDefaultPins = () => {
+   let promises = []
+   let pinData = []
+
+   let pins = ['Tokyo', 'ocean', 'Berlin', 'Dogs', 'cats']
+   pins.forEach((pinTerm) => {
+      promises.push(
+        getImages(pinTerm).then(
+          (res) => {
+            let results = res.data.results;
+
+            pinData = pinData.concat(results);
+
+            pinData.sort(function(a,b){
+              return 0.5 - Math.random()
+            })
+          })
+      )
+   })
+   Promise.all(promises).then(() => {
+     setPins(pinData)
+   })
+}
+
+useEffect(() => {
+  
+  getDefaultPins()
+}, [])
 
 // onSearchSubmit('dog');
 
